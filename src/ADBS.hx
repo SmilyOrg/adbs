@@ -99,9 +99,18 @@ class ADBS extends CommandLine {
 			Sys.exit(2);
 		}
 		if (found.length > 1) {
+			found.sort(function(a, b):Int {
+				var d = a.name.length - b.name.length;
+				return d > 0 ? 1 : d < 0 ? -1 : {
+					a.name < b.name ? 1 : a.name > b.name ? -1 : 0;
+				};
+			});
 			info('Found ${found.length} screens');
 			for (screen in found) info('\t${screen.name}');
-			Sys.exit(3);
+			if (found.length > 10) {
+				info('Please be more specific');
+				Sys.exit(3);
+			}
 		}
 		var s = found[0];
 		var w = s.w;
