@@ -56,6 +56,13 @@ class ADBS extends CommandLine {
 	public var dry:Bool = false;
 	
 	/**
+	 * Set the size in landscape mode instead of portrait.
+	 * 
+	 * @alias l
+	 */
+	public var landscape:Bool = false;
+	
+	/**
 	 * Print this help message.
 	 * 
 	 * @alias h
@@ -116,9 +123,10 @@ class ADBS extends CommandLine {
 		var w = s.w;
 		var h = s.h;
 		var ppi = s.ppi != null ? s.ppi : Math.round(Math.sqrt(w*w+h*h)/s.d);
+		var size = landscape ? '${w}x${h}' : '${h}x${w}';
 		info('${s.name} - ${w} x ${h} @ ${ppi}');
 		exec("adb", 'shell wm density $ppi'.split(" "));
-		exec("adb", 'shell wm size ${w}x${h}'.split(" "));
+		exec("adb", 'shell wm size $size'.split(" "));
 	}
 	
 	function exec(cmd:String, args:Array<String>) {
