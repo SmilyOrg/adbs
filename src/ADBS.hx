@@ -3,7 +3,6 @@ package;
 import haxe.Http;
 import haxe.Json;
 import mcli.CommandLine;
-import neko.Lib;
 import sys.FileSystem;
 import sys.io.File;
 
